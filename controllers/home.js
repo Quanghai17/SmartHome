@@ -36,19 +36,19 @@ exports.mapekmap = async (req, res) => {
             let listlocation = response.data
             let datamarker = [];
             var i = 0;
-            // makers.forEach(function (dataget, index) {
-            //     if (dataget.latitude != null) {
-            //         let item = {
-            //             position: { lat: (dataget.latitude), lng: (dataget.longitude) },
-            //             title: dataget.name + ' - ' + dataget.address,
-            //             homeid: dataget.id,
-            //         };
-            //         datamarker[i] = item;
-            //         i++;
-            //     }
-            // });
-            // res.json(listlocation);
-            res.render('pages/maps3', { lang: req.cookies.lang, cities: JSON.stringify(listlocation), results:noti});
+            makers.forEach(function (dataget, index) {
+                if (dataget.latitude != null) {
+                    let item = {
+                        position: { lat: (dataget.latitude), lng: (dataget.longitude) },
+                        title: dataget.name + ' - ' + dataget.address,
+                        homeid: dataget.id,
+                    };
+                    datamarker[i] = item;
+                    i++;
+                }
+            });
+            // res.json(datamarker);
+            res.render('pages/maps3', { lang: req.cookies.lang, cities: JSON.stringify(datamarker), results:noti});
 
         })
         .catch((error) => {

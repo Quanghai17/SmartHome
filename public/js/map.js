@@ -16,7 +16,7 @@ $('input[type=radio][name=location]').change(function () {
 
 var $map = $('#map');
 const cities = JSON.parse($map.attr('cities'));
-
+console.log(cities);
 // add tile map
 L.tileLayer('https://maps.vietmap.vn/api/tm/{z}/{x}/{y}?apikey=1b6ea57cdf04fbc8ef64e7419aac8237e52a528e47b9c644', {
   maxZoom: 19,
@@ -24,23 +24,23 @@ L.tileLayer('https://maps.vietmap.vn/api/tm/{z}/{x}/{y}?apikey=1b6ea57cdf04fbc8e
 
 
 cities.map(e => {
-  var latitude = e.latitude;
-  var longitude = e.longitude;
+  var latitude = e.position.lat;
+  var longitude = e.position.lng;
 
   let circleMarker = L.circleMarker([latitude, longitude], {
     color: '#03fc17',
     fillColor: '#03fc17',
     fillOpacity: 1,
     radius: 5
-  }).addTo(map).bindPopup(e.name);
+  }).addTo(map).bindPopup(e.title);
 
   var geoJSONLayer = null;
 
   circleMarker.on('click', function (event) {
-    var nameValue = e.name;
+    var nameValue = e.title;
     nameValue = nameValue.replace(/\s/g, '');
-    var latitudeValue = e.latitude;
-    var longitudeValue = e.longitude;
+    var latitudeValue = e.position.lat;
+    var longitudeValue = e.position.lng;
     // Tạo URL của API
     var apiUrlMaker = 'https://maps.vietmap.vn/api/search/v3?apikey=1b6ea57cdf04fbc8ef64e7419aac8237e52a528e47b9c644&text=' + nameValue + '&focus=' + latitudeValue + ',' + longitudeValue + '';
     console.log(apiUrlMaker);
