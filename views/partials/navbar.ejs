@@ -1,0 +1,52 @@
+<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+    <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h4 mb-0 text-uppercase d-none d-lg-inline-block" href="/"></a>
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+            <li class="nav-item dropdown">
+                <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <div class="media align-items-center">
+                        <span class="avatar avatar-sm rounded-circle">
+                            <img alt="Image placeholder" src="/images/logo.png">
+                        </span>
+                        <div class="media-body ml-2 d-none d-lg-block">
+                        </div>
+                    </div>
+                </a>
+                <%- include('./dropdown'); %>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/logout" class="nav-link pr-0">
+                    <i class="ni ni-user-run"></i>
+                    <span class="logout">Logout</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <div class="media align-items-center">
+                        <div class="media-body ml-2 d-none d-lg-block">
+                            <span class="mb-0 text-sm font-weight-bold">
+                                <% if (lang=='vi' ) { %>
+                                    Vietnamese
+                                    <% } else { %>
+                                        English
+                                        <% } %>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                    <a href="change-lang/en" class="dropdown-item">English</a>
+                    <a href="change-lang/vi" class="dropdown-item">Vietnamese</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link pr-0" href="#" role="button">
+                    <span class="material-symbols-sharp" data-mode="dark-theme-variables" data-navbar="navbar-dark"><i class="fas fa-lightbulb fa-fw"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>

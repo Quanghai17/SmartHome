@@ -1,0 +1,125 @@
+<%- include('../partials/header'); %>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
+				<div class="card shadow border-0">
+					<div id="map" cities="<%= cities %>"></div>
+					<div class="bangnoti" style="z-index: 999;">
+						<div class="card shadow border-0">
+							<div class="table-responsive">
+								<!-- Projects table -->
+								<% if (results) { %>
+									<table class="table align-items-center datatable">
+										<thead>
+											<tr>
+												<th scope="col">
+													<%= __('Chọn vị trí') %>
+												</th>
+												<th scope="col">
+													<%= __('Loại Cảnh báo') %>
+												</th>
+												<th scope="col">
+													<%= __('Thời gian') %>
+												</th>
+												<th scope="col">
+													<%= __('Thiết bị') %>
+												</th>
+												<th scope="col">
+													<%= __('Thông tin lỗi') %>
+												</th>
+												<th scope="col">
+													<%= __('Tình trạng') %>
+												</th>
+												<th scope="col">
+													<%= __('Gọi kỹ thuật') %>
+												</th>
+												<th scope="col">
+													<%= __('status') %>
+												</th>
+											</tr>
+										</thead>
+										<tbody class="contentbody">
+											<% results.forEach(function(item){ %>
+												<tr class="<%= item.severity %>">
+													<th>
+														<input type="radio" name="location" data-lat="" data-lng="">
+													</th>
+													<th>
+														<i class="fas fa-bell fa-fw"></i>
+														<%= item.severity %>
+													</th>
+													<td>
+														<span class=" date_createdTime ">
+															<%= item.createdTime %>
+														</span>
+													</td>
+													<td>
+														<%= item.data.gwSerial %> - ID:<%= item.data.deviceID %>
+													</td>
+													<td>
+														<%= item.message %>
+													</td>
+													<td>
+														<div class="custom-control custom-checkbox"><input
+																class="custom-control-input" type="checkbox" value="1"
+																id="cn<%= item.id %>" name="goichunha"><label
+																class="custom-control-label" for="cn<%= item.id %>">
+																<%= __('Gọi chủ nhà') %>
+															</label></div>
+													</td>
+													<td>
+														<div class="custom-control custom-checkbox"><input
+																class="custom-control-input" type="checkbox" value="1"
+																id="kt<%= item.id %>" name="goikythuat"><label
+																class="custom-control-label" for="kt<%= item.id %>">
+																<%= __('Gọi Kỹ thuật') %>
+															</label></div>
+													</td>
+													<td>
+														<button type="button" class="btn btn-primary">
+															<%= __('Hoàn thành') %>
+														</button>
+													</td>
+												</tr>
+												<% }); %>
+										</tbody>
+									</table>
+									<% } %>
+							</div>
+						</div>
+					</div>
+					<!--div class="col-md-4 absotute">
+			<div class="item">
+				<div class="chart">
+					<div class="chartjs-size-monitor">
+						<div class="chartjs-size-monitor-expand">
+							<canvas height="400" width="500" id="chart-bar-stacked" class="chartjs-render-monitor"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div-->
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<%- include('../partials/topfooter'); %>
+	</div>
+
+	<%- include('../partials/footer'); %>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+			integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+			integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+		<script src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></script>
+		<link href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css' rel='stylesheet' />
+
+
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+		<link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" rel='stylesheet'>
+		<script>
+			let table = new DataTable('.datatable');
+		</script>
+
+		<script src="/js/map.js"></script>

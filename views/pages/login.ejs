@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <title>
+        <%= __('Login Form') %>
+    </title>
+    <!-- online fonts -->
+    <%- include('../partials/auth/head'); %>
+        <link href="../login.css" rel="stylesheet" type="text/css" media="all" />
+        <!-- /css files -->
+
+</head>
+
+<body>
+    <div class="container demo-1">
+        <div class="content">
+            <div id="large-header" class="large-header">
+                <%- include('../partials/auth/logo'); %>
+                    <div class="main-agileits">
+                        <!--form-stars-here-->
+                        <div class="form-w3-agile">
+                            <h2>
+                                <%= __('login Now') %>
+                            </h2>
+                            <%=message%>
+                                <form action="#" method="post" name="login">
+                                    <div class="form-sub-w3">
+                                        <input type="text" name="Username" placeholder="Username " required="" />
+                                        <div class="icon-w3">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-sub-w3">
+                                        <input type="password" name="Password" placeholder="Password" required=""
+                                            autocomplete />
+                                        <div class="icon-w3">
+                                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <p class="p-bottom-w3ls">
+                                        <%= __('Forgot Password?') %>
+                                            <a class href="/lostpass/">
+                                                <%= __('Click here') %>
+                                            </a>
+                                    </p>
+                                    <p class="p-bottom-w3ls1">
+                                        <%= __('New User?') %>
+                                            <a class href="/register/">
+                                                <%= __('Register here') %>
+                                            </a>
+                                    </p>
+                                    <div class="clear"></div>
+                                    <div class="submit-w3l">
+                                        <input type="submit" value="Login">
+                                    </div>
+                                </form>
+                                <!--div class="social w3layouts">
+                            <div class="heading">
+                                <h5>
+                                    <%= __('Or Login with') %>
+                                </h5>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="icons">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div-->
+                        </div>
+                        <!--//form-ends-here-->
+                    </div>
+                    <%- include('../partials/auth/footer'); %>
+            </div>
+        </div>
+    </div>
+    <script>
+        console.log(document.cookie)
+    </script>
+</body>
+
+</html>
