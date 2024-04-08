@@ -260,5 +260,7 @@
 	"status": "status",
 	"Gọi chủ nhà": "Gọi chủ nhà",
 	"Gọi Kỹ thuật": "Gọi Kỹ thuật",
-	"Hoàn thành": "Hoàn thành"
+	"Hoàn thành": "Hoàn thành",
+	"Im port CSV": "Im port CSV",
+	"Upload file Bin": "Upload file Bin"
 }

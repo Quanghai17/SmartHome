@@ -1,16 +1,46 @@
 const multer = require('multer');
+const fs = require('fs');
+const axios = require('axios');
+const FormData = require('form-data');
 
-// Set up storage for uploaded files
+const API_URL = 'https://phucuong.kennatech.vn/api/uploadfile';
+
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads');
     },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
     }
 });
 
-// Create the multer instance
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage }).single('file');
 
-module.exports = upload;
+function handleUpload(req, res) {
+    upload(req, res, function (err) {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('File upload failed.');
+        }
+        if (!req.file) {
+            return res.status(400).send('No files were uploaded.');
+        }
+
+        const formData = new FormData();
+        formData.append('name', req.file.originalname);
+
+        axios.post(API_URL, { file_name: req.file.originalname })
+            .then(response => {
+                console.log('File uploaded successfully:', response.data);
+                res.redirect('/uploadfile');
+            })
+            .catch(error => {
+                console.error('Error uploading file:', error);
+                res.status(500).send('File upload failed.');
+            });
+    });
+}
+
+module.exports = {
+    handleUpload
+};

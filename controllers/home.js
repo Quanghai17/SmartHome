@@ -1,9 +1,9 @@
-const { refeshtoken,list_notification,homelistdata} = require('./global');
+const { refeshtoken, list_notification, homelistdata } = require('./global');
 const { parseError } = require('./error');
 const axios = require('axios');
-const tokename = Buffer.from("token").toString('base64').replace('=','');
-const retokename = Buffer.from("refreshtoken").toString('base64').replace('=','');
-const userobjname = Buffer.from("userobj").toString('base64').replace('=','');
+const tokename = Buffer.from("token").toString('base64').replace('=', '');
+const retokename = Buffer.from("refreshtoken").toString('base64').replace('=', '');
+const userobjname = Buffer.from("userobj").toString('base64').replace('=', '');
 const timetoken = {
     expires: new Date(
         Date.now() + 10 * 60 * 1000
@@ -27,10 +27,10 @@ exports.mapekmap = async (req, res) => {
             'Authorization': 'Bearer ' + token,
         }
     };
-    const noti = await list_notification(token,1);
+    const noti = await list_notification(token, 1);
     
-   const makers = await homelistdata(token);
-   console.log(makers)
+    const makers = await homelistdata(token);
+    // console.log(makers)
     await axios.request(config)
         .then((response) => {
             let listlocation = response.data
@@ -45,14 +45,57 @@ exports.mapekmap = async (req, res) => {
                     };
                     datamarker[i] = item;
                     i++;
+                    
                 }
             });
             // res.json(datamarker);
-            res.render('pages/maps3', { lang: req.cookies.lang, cities: JSON.stringify(datamarker), results:noti});
+            res.render('pages/maps3', { lang: req.cookies.lang, cities: JSON.stringify(datamarker), results: noti });
 
         })
         .catch((error) => {
             const { code, message } = parseError(error)
             res.json({ code, message });
         });
+}
+
+exports.importFile = async (req, res) => {
+
+    if (req.cookies[tokename]) {
+        var token = req.cookies[tokename]
+    } else {
+        var tokenrf = req.cookies[retokename];
+        var token = await refeshtoken(tokenrf);
+        res.cookie(tokename, token, timetoken);;
+    }
+    
+    res.render('pages/importfile', { lang: req.cookies.lang });
+       
+}
+
+exports.importFile = async (req, res) => {
+
+    if (req.cookies[tokename]) {
+        var token = req.cookies[tokename]
+    } else {
+        var tokenrf = req.cookies[retokename];
+        var token = await refeshtoken(tokenrf);
+        res.cookie(tokename, token, timetoken);;
+    }
+    
+    res.render('pages/importfile', { lang: req.cookies.lang });
+       
+}
+
+exports.uploadFile = async (req, res) => {
+
+    if (req.cookies[tokename]) {
+        var token = req.cookies[tokename]
+    } else {
+        var tokenrf = req.cookies[retokename];
+        var token = await refeshtoken(tokenrf);
+        res.cookie(tokename, token, timetoken);;
+    }
+    
+    res.render('pages/uploadfile', { lang: req.cookies.lang });
+       
 }

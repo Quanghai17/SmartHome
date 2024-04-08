@@ -1,0 +1,43 @@
+<%- include('../partials/header'); %>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-12 order-xl-1">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">
+                                    Upload file
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="/upload" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-groups">
+                                        <label class="form-control-label" for="input-email">
+                                            Chosee file
+                                        </label>
+                                        <input type="file" class="form-control" name="file">
+                                        <strong class="invalid-feedback" style="display: block">
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button type="submit" class="btn btn-primary mt-4 mb-4">
+                                        Upload
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+		</div>
+		<!-- Footer -->
+		<%- include('../partials/topfooter'); %>
+	</div>
+
+	<%- include('../partials/footer'); %>
