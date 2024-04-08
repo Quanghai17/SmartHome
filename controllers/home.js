@@ -72,20 +72,6 @@ exports.importFile = async (req, res) => {
        
 }
 
-exports.importFile = async (req, res) => {
-
-    if (req.cookies[tokename]) {
-        var token = req.cookies[tokename]
-    } else {
-        var tokenrf = req.cookies[retokename];
-        var token = await refeshtoken(tokenrf);
-        res.cookie(tokename, token, timetoken);;
-    }
-    
-    res.render('pages/importfile', { lang: req.cookies.lang });
-       
-}
-
 exports.uploadFile = async (req, res) => {
 
     if (req.cookies[tokename]) {
