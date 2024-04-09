@@ -28,7 +28,7 @@ exports.mapekmap = async (req, res) => {
         }
     };
     const noti = await list_notification(token, 1);
-    
+
     const makers = await homelistdata(token);
     // console.log(makers)
     await axios.request(config)
@@ -45,7 +45,7 @@ exports.mapekmap = async (req, res) => {
                     };
                     datamarker[i] = item;
                     i++;
-                    
+
                 }
             });
             // res.json(datamarker);
@@ -60,16 +60,30 @@ exports.mapekmap = async (req, res) => {
 
 exports.importFile = async (req, res) => {
 
-    if (req.cookies[tokename]) {
-        var token = req.cookies[tokename]
-    } else {
-        var tokenrf = req.cookies[retokename];
-        var token = await refeshtoken(tokenrf);
-        res.cookie(tokename, token, timetoken);;
+    try {
+        let token;
+
+        if (req.cookies[tokename]) {
+            token = req.cookies[tokename];
+        } else {
+            const tokenrf = req.cookies[retokename];
+            token = await refeshtoken(tokenrf);
+            res.cookie(tokename, token, timetoken);
+        }
+
+        const response = await axios.get('https://phucuong.kennatech.vn/api/getways', {
+            headers: {
+                Authorization: `Bearer ${token}` 
+            }
+        });
+        const getways = response.data; 
+        
+        res.render('pages/importfile', { lang: req.cookies.lang, getways });
+    } catch (error) {
+        console.error('Lỗi khi lấy danh sách getways:', error);
+        res.status(500).send('Đã xảy ra lỗi khi lấy danh sách getways');
     }
-    
-    res.render('pages/importfile', { lang: req.cookies.lang });
-       
+
 }
 
 exports.uploadFile = async (req, res) => {
@@ -81,7 +95,7 @@ exports.uploadFile = async (req, res) => {
         var token = await refeshtoken(tokenrf);
         res.cookie(tokename, token, timetoken);;
     }
-    
+
     res.render('pages/uploadfile', { lang: req.cookies.lang });
-       
+
 }
